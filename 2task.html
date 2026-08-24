@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Tasks</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #f0f2f5;
+            color: #333;
+        }
+        h1 {
+            color: #1a3c6e;
+            border-bottom: 3px solid #1a3c6e;
+            padding-bottom: 10px;
+        }
+        .task {
+            background: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c5282;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        label {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+        input, select {
+            padding: 8px 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+            margin: 5px 0 10px 0;
+            display: block;
+        }
+        button {
+            background: #2c5282;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #1a3c6e;
+        }
+        .ext-link {
+            margin: 15px 0;
+        }
+        .ext-link a {
+            color: #2c5282;
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 2px solid #2c5282;
+            font-size: 1.1em;
+        }
+        .ext-link a:hover {
+            color: #1a3c6e;
+        }
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .flex-row > div {
+            flex: 1 1 200px;
+        }
+        hr {
+            margin: 30px 0;
+            border: 1px solid #ddd;
+        }
+        .note {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #e8f0fe;
+            border-radius: 4px;
+            border-left: 4px solid #2c5282;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Web Development Tasks</h1>
+
+<div class="task">
+    <h2>Task 1: Mobile Number Input</h2>
+    <p style="color: #555;">Enter 10 digits between 1111111111 and 9999999999</p>
+    <form>
+        <label for="mobile">Mobile Number:</label>
+        <input type="text" id="mobile" placeholder="e.g. 9876543210" maxlength="10" pattern="[0-9]{10}" title="Please enter exactly 10 digits">
+        <button type="submit">Verify</button>
+    </form>
+    <div class="result">
+        <strong>Note:</strong> The input field only accepts numbers (max 10 digits). 
+        The range validation (1111111111 to 9999999999) would require JavaScript for full client-side validation.
+    </div>
+</div>
+
+<div class="task">
+    <h2>Task 2: External Link</h2>
+    <div class="ext-link">
+        <a href="https://www.google.com" target="_blank" rel="noopener">Visit Google (opens in new tab)</a>
+    </div>
+    <p class="note">Click the link to open in a new tab</p>
+</div>
+
+<div class="task">
+    <h2>Task 3: Car Selection Form</h2>
+    <form>
+        <div class="flex-row">
+            <div>
+                <label for="carModel">Car Model:</label>
+                <select id="carModel">
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Porche" selected>Porche</option>
+                    <option value="Cadilac">Cadilac</option>
+                    <option value="McLaren">McLaren</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="BMW">BMW</option>
+                </select>
+            </div>
+            <div>
+                <label for="enginePower">Engine Power:</label>
+                <select id="enginePower">
+                    <option value="500–700 HP (V8 & V6 Engines)">500–700 HP (V8 & V6)</option>
+                    <option value="700–900 HP (Hybrid V6/V8 Systems)" selected>700–900 HP (Hybrid V6/V8)</option>
+                    <option value="1,000–1,500+ HP (Hypercar Territory)">1,000–1,500+ HP (Hypercar)</option>
+                    <option value="1,900–2,100+ HP (Pure Electric)">1,900–2,100+ HP (Pure Electric)</option>
+                </select>
+            </div>
+            <div>
+                <label for="carColor">Car Color:</label>
+                <select id="carColor">
+                    <option value="Red">Red</option>
+                    <option value="Grey" selected>Grey</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Blue">Blue</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit">Submit Selection</button>
+    </form>
+    <div class="result">
+        <strong>Selected:</strong> Porche | 700–900 HP (Hybrid V6/V8 Systems) | Grey
+    </div>
+</div>
+
+<hr>
+
+</body>
+</html>
