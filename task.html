@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Practice</title>
+        <title>IPL BOOKER</title>
         <style>
             header{
                 background-color: green;
@@ -12,6 +12,10 @@
             .navbar{
                 background-color: #2a2a2a;
                 padding: 3px 10px;
+
+            }
+            .navbar::scroll-marker{
+                background-color: red;
             }
             .nav-links{
                list-style:none;
@@ -28,11 +32,37 @@
             border: 1px solid #ddd; /* Adds a clean border to individual cells */
            /* color: #333;            /* Sets the text color */
             }            
+            .footer_section{
+                padding: 2%; 
+                text-align : right; 
+                border : 2px loose black ; 
+                border-radius: 2%;
+                border-width: 3px;
+                /* background-color: blue; */
+
+
+
+            }
+            .footer_section:hover{
+                background-color: #e37373;
+            }
+            .footer:hover p{
+                text-decoration: dashed;
+                text-shadow: #e37373;
+                color : white; 
+                size: 30px; 
+                font-size: large;
+                
+
+
+            }
+
+
         </style>
     </head>
     <body>
         <header>
-            <h1>IPL Ticket booking App</h1>
+            <h1>IPL Ticket booking App &trade;</h1>
         </header>
         <nav class="navbar">
         <ul class="nav-links">
@@ -90,6 +120,12 @@
                 <br><br>
                 <button type="submit">Submit</button>               
             </form>
+        </section>
+        <section class = "footer_section"> 
+            <footer class= "footer" > 
+                <p>Copyright &copy; 2023 IPL Ticket booking App. All rights reserved.</p>
+
+            </footer>
         </section>             
     </body>
 </html>
