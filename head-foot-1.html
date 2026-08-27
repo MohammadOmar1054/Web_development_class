@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>Practice</title>
+        <style>
+            header{
+                background-color: green;
+                size :100%;
+                padding: 15px;
+                color: white;
+                text-align: center;
+            }
+            .navbar{
+                background-color: #2a2a2a;
+                padding: 3px 10px;
+            }
+            .nav-links{
+               list-style:none;
+               background-color:white;
+               display:flex;
+               gap:15px;
+               margin: 10px 5px; 
+               padding: 0%;
+            }    
+            td {
+            padding: 0%;          /* Adds breathing room inside the cell */
+            text-align: center;     /* Aligns the text horizontally */
+           /* vertical-align: middle; /* Aligns the text vertically */
+            border: 1px solid #ddd; /* Adds a clean border to individual cells */
+           /* color: #333;            /* Sets the text color */
+            }            
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>IPL Ticket booking App</h1>
+        </header>
+        <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href=#book hover="red">Book your tickets</li>
+            <li><a href=#status>Check your booking status</li>
+            <li><a href=#cancel>Cancel your booking</li>
+        </ul>
+        </nav>
+        <table style="width:100%; border: 1px solid black;">
+            <tr style = "border: 1px solid rgb(238, 54, 54); background-color: #e37373;">
+                <th>S.No</th>
+                <th>Teams</th>
+                <th>date</th>
+                <th>Time</th>
+                <th>venue</th>
+                <th>price</th>
+                <th></th>
+            </tr>
+            <tr style = "background-color: #e37373;" >
+                <td style="text-align: center">1</td>
+                <td><select name="teams" id="teams">
+                    <option value="team1">RCB</option>
+                    <option value="team2">MI</option>
+                </select></td>
+                <td>2023-10-15</td>
+                <td>19:00</td>
+                <td>Mumbai</td>
+                <td><span>₹ 500</span> Early price</td>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </table>    
+
+        <section id="book">
+            <h2>Book your tickets</h2>
+            <p>Fill the below details</p>
+            <form>
+                <label for="name">Name: </label>
+                <input type="text" id="name" name="name">
+                <br><br>
+                <label for="email">Email: </label>
+                <input type="email" id="email" name="email">
+                <br><br>
+                <label for="mobile">Mobile: </label>
+                <input type="tel" id="mobile" pattern="[0-9]{10} maxlength=10">
+                <br><br>    
+                <button type="submit">Submit</button>               
+            </form>
+        </section>     
+<section id="status">
+            <h2>Check status of tickets</h2>
+            <p>Fill the below details</p>
+            <form>
+                <label for="ticket">Ticket No </label>
+                <input type="number" id="tiket" name="ticket">
+                <br><br>
+                <button type="submit">Submit</button>               
+            </form>
+        </section>             
+    </body>
+</html>
