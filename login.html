@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Login - IPL BOOKER</title>
+        <style>
+            header{
+                background-color: green;
+                size :100%;
+                padding: 15px;
+                color: white;
+                text-align: center;
+            }
+            header h1{
+                margin: 5px ;
+                color : cyan;
+                background-color: blueviolet;
+            }
+            .form_box{
+                margin: 20px auto;
+                width: 300px;
+            }
+            .form_box label{
+                display: block;
+                margin-top: 10px;
+            }
+            .form_box input{
+                width: 100%;
+                padding: 5px;
+            }
+            .form_box button{
+                margin-top: 15px;
+                padding: 6px 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img src="favicon_io/android-chrome-192x192.png" alt="IPL Booker Logo" width="80" height="80">
+            <h1>Login</h1>
+            <p>Sign in to your IPL Booker account</p>
+        </header>
+        <div class="form_box">
+            <form>
+                <label for="username">User name: </label>
+                <input type="text" id="username" name="username">
+
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password">
+
+                <button type="submit">Submit</button>
+            </form>
+            <p><a href="signup.html">New user? Signup</a></p>
+        </div>
+    </body>
+</html>

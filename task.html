@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <title>IPL BOOKER</title>
@@ -39,9 +40,6 @@
                 border-radius: 2%;
                 border-width: 3px;
                 /* background-color: blue; */
-
-
-
             }
             .footer_section:hover{
                 background-color: #e37373;
@@ -52,23 +50,50 @@
                 color : white; 
                 size: 30px; 
                 font-size: large;
+            }
+            header h1{ 
+                margin: 5px ;
+                color : cyan; 
+                background-color: blueviolet; 
                 
-
+            }
+            header p{
+                margin :4px ;
+                color : brown;
+                background-color: blue;
 
             }
-
+            header .logo{
+                display: block;
+                margin: 0 auto 8px auto;
+            }
+            header .auth-links{
+                background-color: transparent;
+                color: white;
+            }
+            header .auth-links a{
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
 
         </style>
     </head>
     <body>
         <header>
+            <img src="favicon_io/android-chrome-192x192.png" alt="IPL Booker Logo" class="logo" width="80" height="80">
             <h1>IPL Ticket booking App &trade;</h1>
+            <P>Find the lowest ticket prices</P>
+            <p class="auth-links">
+                <a href="login.html">Login</a> |
+                <a href="signup.html">Signup</a>
+            </p>
         </header>
         <nav class="navbar">
         <ul class="nav-links">
-            <li><a href=#book hover="red">Book your tickets</li>
-            <li><a href=#status>Check your booking status</li>
-            <li><a href=#cancel>Cancel your booking</li>
+            <li><a href="#book" hover="red">Book your tickets</a></li>
+            <li><a href="#status">Check your booking status</a></li>
+            <li><a href="#cancel">Cancel your booking</a></li>
         </ul>
         </nav>
         <table style="width:100%; border: 1px solid black;">
@@ -84,16 +109,64 @@
             <tr style = "background-color: #e37373;" >
                 <td style="text-align: center">1</td>
                 <td><select name="teams" id="teams">
-                    <option value="team1">RCB</option>
-                    <option value="team2">MI</option>
+                    <option value="team1">RCB vs MI</option>
+                    <option value="team2">CSK vs RCB</option>
                 </select></td>
                 <td>2023-10-15</td>
                 <td>19:00</td>
-                <td>Mumbai</td>
+                <td>Wankhede Stadium, Mumbai</td>
                 <td><span>₹ 500</span> Early price</td>
                 <td><button type="submit">Submit</button></td>
             </tr>
-        </table>    
+            <tr style = "background-color: #e37373;" >
+                <td style="text-align: center">2</td>
+                <td><select name="teams" id="teams2">
+                    <option value="team1">CSK vs KKR</option>
+                    <option value="team2">CSK vs SRH</option>
+                </select></td>
+                <td>2023-10-18</td>
+                <td>15:30</td>
+                <td>M. A. Chidambaram Stadium, Chennai</td>
+                <td><span>₹ 750</span> Early price</td>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+            <tr style = "background-color: #e37373;" >
+                <td style="text-align: center">3</td>
+                <td><select name="teams" id="teams3">
+                    <option value="team1">KKR vs DC</option>
+                    <option value="team2">KKR vs PBKS</option>
+                </select></td>
+                <td>2023-10-21</td>
+                <td>19:00</td>
+                <td>Eden Gardens, Kolkata</td>
+                <td><span>₹ 600</span> Early price</td>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+            <tr style = "background-color: #e37373;" >
+                <td style="text-align: center">4</td>
+                <td><select name="teams" id="teams4">
+                    <option value="team1">DC vs SRH</option>
+                    <option value="team2">DC vs RR</option>
+                </select></td>
+                <td>2023-10-24</td>
+                <td>19:00</td>
+                <td>Arun Jaitley Stadium, Delhi</td>
+                <td><span>₹ 550</span> Early price</td>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+            <tr style = "background-color: #e37373;" >
+                <td style="text-align: center">5</td>
+                <td><select name="teams" id="teams5">
+                    <option value="team1">GT vs LSG</option>
+                    <option value="team2">GT vs RR</option>
+                </select></td>
+                <td>2023-10-27</td>
+                <td>15:30</td>
+                <td>Narendra Modi Stadium, Ahmedabad</td>
+                <td><span>₹ 800</span> Early price</td>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </table>
 
         <section id="book">
             <h2>Book your tickets</h2>
@@ -107,10 +180,22 @@
                 <br><br>
                 <label for="mobile">Mobile: </label>
                 <input type="tel" id="mobile" pattern="[0-9]{10} maxlength=10">
-                <br><br>    
-                <button type="submit">Submit</button>               
+                <br><br>
+                <label for="num_tickets">Number of tickets: </label>
+                <input type="number" id="num_tickets" name="num_tickets" min="1" max="10" value="1">
+                <br><br>
+                <label for="seat_class">Select seating: </label>
+                <select name="seat_class" id="seat_class">
+                    <option value="balcony">Balcony</option>
+                    <option value="box_balcony">Box Balcony</option>
+                    <option value="luxury_balcony">Luxury Balcony</option>
+                    <option value="ground">Ground</option>
+                    <option value="first_class">1 Class</option>
+                </select>
+                <br><br>
+                <button type="submit">Book tickets</button>
             </form>
-        </section>     
+        </section>
 <section id="status">
             <h2>Check status of tickets</h2>
             <p>Fill the below details</p>
@@ -121,11 +206,13 @@
                 <button type="submit">Submit</button>               
             </form>
         </section>
-        <section class = "footer_section"> 
-            <footer class= "footer" > 
+        <section class = "footer_section">
+            <footer class= "footer" >
                 <p>Copyright &copy; 2023 IPL Ticket booking App. All rights reserved.</p>
-
+                <p>Company: IPL Booker Pvt. Ltd.</p>
+                <p>Address: 42 Cricket Avenue, Bandra West, Mumbai, Maharashtra 400050, India</p>
+                <p>Contact us: <a href="mailto:support@iplbooker.com">support@iplbooker.com</a> | +91 98765 43210</p>
             </footer>
-        </section>             
+        </section>
     </body>
 </html>
