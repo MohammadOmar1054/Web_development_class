@@ -107,8 +107,33 @@ body {
   color: #182b49;
 }
 
+.booking-total {
+  padding-top: 14px;
+  border-top: 1px solid #e1e4e8;
+  color: #182b49;
+  font-size: 1.1rem;
+}
+
 .booking-details p + p {
   margin-top: 12px;
+}
+
+.stand-information {
+  margin-top: 24px;
+  padding: 24px 28px;
+  text-align: left;
+  background-color: #e9f5ff;
+  border-left: 5px solid #182b49;
+  border-radius: 8px;
+}
+
+.stand-information h3 {
+  margin: 0 0 10px;
+  color: #182b49;
+}
+
+.stand-information p + p {
+  margin-top: 10px;
 }
 
 .booking-form input,
