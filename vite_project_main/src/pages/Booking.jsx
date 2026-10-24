@@ -1,4 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  clearBookingDraft,
+  getBookingDraft,
+  saveBooking,
+  saveBookingDraft,
+} from "../utils/bookingStorage";
 
 const matches = [
   {
@@ -43,18 +49,23 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const phoneRegex = /^\+?[0-9][0-9\s-]{8,14}$/;
 
 function Booking() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [tickets, setTickets] = useState(1);
-  const [matchId, setMatchId] = useState("");
-  const [stand, setStand] = useState("");
+  const draft = getBookingDraft();
+  const [name, setName] = useState(draft?.name || "");
+  const [email, setEmail] = useState(draft?.email || "");
+  const [phone, setPhone] = useState(draft?.phone || "");
+  const [tickets, setTickets] = useState(draft?.tickets || 1);
+  const [matchId, setMatchId] = useState(draft?.matchId || "");
+  const [stand, setStand] = useState(draft?.stand || "");
   const [errors, setErrors] = useState({});
 
   const selectedMatch = matches.find((match) => match.id === matchId);
   const selectedStand = stands[stand];
   const ticketPrice = selectedStand?.price || 0;
   const totalAmount = ticketPrice * Number(tickets || 0);
+
+  useEffect(() => {
+    saveBookingDraft({ name, email, phone, tickets, matchId, stand });
+  }, [name, email, phone, tickets, matchId, stand]);
 
   function validateBooking() {
     const nextErrors = {};
@@ -89,6 +100,21 @@ function Booking() {
       return;
     }
 
+    saveBooking({
+      id: `${Date.now()}-${matchId}`,
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      tickets: Number(tickets),
+      match: selectedMatch.name,
+      date: selectedMatch.date,
+      venue: selectedMatch.venue,
+      stand: selectedStand.name,
+      ticketPrice,
+      totalAmount,
+      bookedAt: new Date().toISOString(),
+    });
+    clearBookingDraft();
     alert("Ticket booked successfully!");
   }
 

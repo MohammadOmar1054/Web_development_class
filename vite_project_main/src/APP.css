@@ -114,6 +114,11 @@ h1 { margin: 0; color: var(--ink); font-size: clamp(2.3rem, 6vw, 5rem); line-hei
 .booking-details p + p, .stand-information p + p { margin-top: 12px; }
 .booking-total { padding-top: 15px; border-top: 1px solid var(--line); color: var(--orange); font-size: 1.1rem; }
 .stand-information { border-left: 5px solid var(--orange); background: #fff4df; }
+.booking-table-wrapper { overflow-x: auto; margin-top: 25px; }
+.booking-table { width: 100%; min-width: 650px; border-collapse: collapse; text-align: left; font-size: .9rem; }
+.booking-table th { padding: 12px; color: var(--muted); background: #fff4df; font-size: .75rem; letter-spacing: .5px; text-transform: uppercase; }
+.booking-table td { padding: 15px 12px; border-bottom: 1px solid var(--line); }
+.booking-table tbody tr:last-child td { border-bottom: 0; }
 
 @media (max-width: 700px) {
   .navbar { align-items: flex-start; flex-direction: column; }
