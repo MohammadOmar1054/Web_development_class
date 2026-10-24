@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 import Booking from "./pages/Booking";
 import BookingHistory from "./pages/BookingHistory";
-import "./App.css";
+import "./APP.css";
 
 function App() {
   return (
