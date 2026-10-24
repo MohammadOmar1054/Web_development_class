@@ -39,39 +39,144 @@ const currency = new Intl.NumberFormat("en-IN", {
   maximumFractionDigits: 0,
 });
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const phoneRegex = /^\+?[0-9][0-9\s-]{8,14}$/;
+
 function Booking() {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [tickets, setTickets] = useState(1);
   const [matchId, setMatchId] = useState("");
   const [stand, setStand] = useState("");
+  const [errors, setErrors] = useState({});
 
   const selectedMatch = matches.find((match) => match.id === matchId);
   const selectedStand = stands[stand];
   const ticketPrice = selectedStand?.price || 0;
   const totalAmount = ticketPrice * Number(tickets || 0);
 
-  function handleBooking() {
-    if (!name || !tickets || !stand || !selectedMatch) {
-      alert("Please fill all the details");
+  function validateBooking() {
+    const nextErrors = {};
+    const phoneDigits = phone.replace(/\D/g, "");
+
+    if (!name.trim()) nextErrors.name = "Name is required.";
+    if (!email.trim()) {
+      nextErrors.email = "Email is required.";
+    } else if (!emailRegex.test(email.trim())) {
+      nextErrors.email = "Enter a valid email address.";
+    }
+    if (!phone.trim()) {
+      nextErrors.phone = "Phone number is required.";
+    } else if (!phoneRegex.test(phone.trim()) || phoneDigits.length < 10 || phoneDigits.length > 15) {
+      nextErrors.phone = "Enter a valid phone number.";
+    }
+    if (!tickets || Number(tickets) < 1 || Number(tickets) > 10) {
+      nextErrors.tickets = "Choose between 1 and 10 tickets.";
+    }
+    if (!matchId) nextErrors.match = "Please select a match.";
+    if (!stand) nextErrors.stand = "Please select a stand.";
+
+    return nextErrors;
+  }
+
+  function handleBooking(event) {
+    event.preventDefault();
+    const nextErrors = validateBooking();
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
       return;
     }
 
     alert("Ticket booked successfully!");
   }
 
+  function handleFieldChange(setter, field, value) {
+    setter(value);
+    const nextError = getFieldError(field, value);
+    setErrors((currentErrors) => {
+      const nextErrors = { ...currentErrors };
+      if (nextError) {
+        nextErrors[field] = nextError;
+      } else {
+        delete nextErrors[field];
+      }
+      return nextErrors;
+    });
+  }
+
+  function getFieldError(field, value) {
+    const trimmedValue = String(value).trim();
+    const phoneDigits = trimmedValue.replace(/\D/g, "");
+
+    if (field === "name" && !trimmedValue) return "Name is required.";
+    if (field === "email") {
+      if (!trimmedValue) return "Email is required.";
+      if (!emailRegex.test(trimmedValue)) return "Enter a valid email address.";
+    }
+    if (field === "phone") {
+      if (!trimmedValue) return "Phone number is required.";
+      if (!phoneRegex.test(trimmedValue) || phoneDigits.length < 10 || phoneDigits.length > 15) {
+        return "Enter a valid phone number.";
+      }
+    }
+    if (field === "tickets" && (!value || Number(value) < 1 || Number(value) > 10)) {
+      return "Choose between 1 and 10 tickets.";
+    }
+    if (field === "match" && !value) return "Please select a match.";
+    if (field === "stand" && !value) return "Please select a stand.";
+
+    return "";
+  }
+
+  function fieldClass(field) {
+    return errors[field] ? "invalid-field" : "";
+  }
+
   return (
     <main className="booking-page">
       <h1>Book Your Ticket</h1>
 
-      <div className="booking-form">
+      <form className="booking-form" onSubmit={handleBooking} noValidate>
         <label htmlFor="name">Name</label>
         <input
           id="name"
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          className={fieldClass("name")}
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "name-error" : undefined}
+          onChange={(e) => handleFieldChange(setName, "name", e.target.value)}
           placeholder="Enter your name"
         />
+        {errors.name && <p id="name-error" className="field-error">{errors.name}</p>}
+
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          className={fieldClass("email")}
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "email-error" : undefined}
+          onChange={(e) => handleFieldChange(setEmail, "email", e.target.value)}
+          placeholder="Enter your email"
+        />
+        {errors.email && <p id="email-error" className="field-error">{errors.email}</p>}
+
+        <label htmlFor="phone">Phone Number</label>
+        <input
+          id="phone"
+          type="tel"
+          value={phone}
+          className={fieldClass("phone")}
+          aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? "phone-error" : undefined}
+          onChange={(e) => handleFieldChange(setPhone, "phone", e.target.value)}
+          placeholder="Enter your phone number"
+        />
+        {errors.phone && <p id="phone-error" className="field-error">{errors.phone}</p>}
 
         <label htmlFor="tickets">Number of Tickets</label>
         <input
@@ -80,14 +185,21 @@ function Booking() {
           min="1"
           max="10"
           value={tickets}
-          onChange={(e) => setTickets(e.target.value)}
+          className={fieldClass("tickets")}
+          aria-invalid={Boolean(errors.tickets)}
+          aria-describedby={errors.tickets ? "tickets-error" : undefined}
+          onChange={(e) => handleFieldChange(setTickets, "tickets", e.target.value)}
         />
+        {errors.tickets && <p id="tickets-error" className="field-error">{errors.tickets}</p>}
 
         <label htmlFor="match">Select Match</label>
         <select
           id="match"
           value={matchId}
-          onChange={(e) => setMatchId(e.target.value)}
+          className={fieldClass("match")}
+          aria-invalid={Boolean(errors.match)}
+          aria-describedby={errors.match ? "match-error" : undefined}
+          onChange={(e) => handleFieldChange(setMatchId, "match", e.target.value)}
         >
           <option value="">-- Select Match --</option>
           {matches.map((match) => (
@@ -96,12 +208,16 @@ function Booking() {
             </option>
           ))}
         </select>
+        {errors.match && <p id="match-error" className="field-error">{errors.match}</p>}
 
         <label htmlFor="stand">Select Stand</label>
         <select
           id="stand"
           value={stand}
-          onChange={(e) => setStand(e.target.value)}
+          className={fieldClass("stand")}
+          aria-invalid={Boolean(errors.stand)}
+          aria-describedby={errors.stand ? "stand-error" : undefined}
+          onChange={(e) => handleFieldChange(setStand, "stand", e.target.value)}
         >
           <option value="">-- Select Stand --</option>
           {Object.entries(stands).map(([standId, standDetails]) => (
@@ -110,11 +226,12 @@ function Booking() {
             </option>
           ))}
         </select>
+        {errors.stand && <p id="stand-error" className="field-error">{errors.stand}</p>}
 
-        <button onClick={handleBooking}>
+        <button type="submit">
           Book Ticket
         </button>
-      </div>
+      </form>
 
       <section className="booking-details" aria-live="polite">
         <h3>Booking Summary</h3>

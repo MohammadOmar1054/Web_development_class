@@ -157,6 +157,22 @@ body {
   border-color: #182b49;
 }
 
+.booking-form .invalid-field {
+  border: 2px solid #c62828;
+  background-color: #fff5f5;
+}
+
+.booking-form .invalid-field:focus {
+  outline: 2px solid #ef9a9a;
+  border-color: #c62828;
+}
+
+.field-error {
+  margin: -4px 0 2px;
+  color: #c62828;
+  font-size: 0.9rem;
+}
+
 .booking-form button {
   padding: 10px 20px;
   cursor: pointer;
